@@ -2,13 +2,10 @@
   "name": "botfilm",
   "author": "thisoverride",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.2.6",
     "dotenv": "^16.0.3",
-    "json": "^11.0.0",
-    "lodash": "^4.17.21",
     "nodemailer": "^6.9.1",
     "puppeteer": "^19.6.0"
   }
