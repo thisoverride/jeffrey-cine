@@ -1,0 +1,10 @@
+{
+    "botOption": {
+        "headless": true,
+        "targetUrl": "https://www.allocine.fr/film/avantpremieres/ville-115755/",
+        "receiptEmail": "",
+        "importantMovies": [],
+        "importantColorMovies": "",
+        "isInit": true
+    }
+}
