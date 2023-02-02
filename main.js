@@ -3,6 +3,9 @@ const puppeteer = require("puppeteer");
 const fs = require('fs');
 const bot = require('./botconfig.json');
 const movieCompareUpdater = require('./controller/movieListUpdater')
+let movieLinksObj = {};
+
+
 
 
 const getMoviesListing = async (page) => {
@@ -13,8 +16,17 @@ const getMoviesListing = async (page) => {
   let jsonify = '';
   for (const [index,item] of contentPage.entries()) { //extract title from <a> element in <li> 
     let containerTitle = await item.$(".meta-title-link");
+
+    await page.waitForSelector('.buttons-holder')
+    let containerLinks = await item.$(".buttons-holder");
+    let link = await containerLinks.$eval('a',lnks => lnks.getAttribute('href')); // getting href link
+
     let movieTitle = await containerTitle.evaluate((el) => el.textContent);
-    jsonify += `"${movieTitle}",` 
+
+
+    movieLinksObj[movieTitle] = link;
+
+    jsonify += `"${movieTitle}",`;
   }
 
   return jsonify
@@ -41,12 +53,10 @@ const getMoviesListing = async (page) => {
 
   let pageMovie = Object.entries(pageLength);
   let jsonMovies ='{"movie":['
-  for (let i = 1; i <= pageMovie.length; i++) {
-    console.info(`Lancement de la récupération.. page ${i} sur ${pageMovie.length}`);
-    if(i !== 1){
-      await page.goto(`${(bot.botOption.targetUrl)}?page=${i}`);
-    }
 
+  for (let i = 1; i <= pageMovie.length; i++) { //Builling movieJson filling array title 
+    console.info(`Récupération.. page ${i} sur ${pageMovie.length}`);
+    if(i !== 1){await page.goto(`${(bot.botOption.targetUrl)}?page=${i}`)};
     jsonMovies += await getMoviesListing(page);
   }
 
@@ -87,7 +97,7 @@ const getMoviesListing = async (page) => {
     });
     await browser.close();
   }
-  await movieCompareUpdater(result);
+  await movieCompareUpdater(result, movieLinksObj);
   await browser.close();
   
 })();
