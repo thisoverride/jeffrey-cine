@@ -30,9 +30,10 @@ const sender = async (pNewMovies) => {
             let insert_pos = data.indexOf('%insert_movie%');
             let list_elements = '';
             
-            for (const [index,item] of pNewMovies.entries()) {
-                list_elements += `<li>${item}</li>`;
-            }
+            for (const [key, value] of Object.entries(pNewMovies)) {
+                list_elements += `<li><a style="color:#ffb741;
+                " href="https://www.allocine.fr${value}">${key}</a></li>`;
+            };
             data = data.slice(0, insert_pos) + list_elements + data.slice(insert_pos + 15);
             htmlTemplate = data;
             resolve();
@@ -47,11 +48,10 @@ const sender = async (pNewMovies) => {
           html: `${htmlTemplate}`
         });
     });
-    console.info('Envoie de l\'email terminé.')
-
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
+
 };
 
 module.exports = sender;
