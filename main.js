@@ -32,8 +32,8 @@ const getMoviesListing = async (page) => {
   return jsonify
 };
 
-(async () => {
-
+const run  = async () => {
+    console.info('      _       __  __                                           _               \r\n     | | ___ \/ _|\/ _|_ __ ___ _   _   _ __  _ __ ___ _ __ ___ (_) ___ _ __ ___ \r\n  _  | |\/ _ \\ |_| |_| \'__\/ _ \\ | | | | \'_ \\| \'__\/ _ \\ \'_ ` _ \\| |\/ _ \\ \'__\/ _ \\\r\n | |_| |  __\/  _|  _| | |  __\/ |_| | | |_) | | |  __\/ | | | | | |  __\/ | |  __\/\r\n  \\___\/ \\___|_| |_| |_|  \\___|\\__, | | .__\/|_|  \\___|_| |_| |_|_|\\___|_|  \\___|\r\n                              |___\/  |_|                                       ')
   if(!bot.botOption.isInit) console.info('Initialisation en cours...');
   const browser = await puppeteer.launch({ headless: bot.botOption.headless });
   const page = await browser.newPage();
@@ -100,4 +100,4 @@ const getMoviesListing = async (page) => {
   await movieCompareUpdater(result, movieLinksObj);
   await browser.close();
   
-})();
+}
