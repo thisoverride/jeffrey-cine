@@ -31,7 +31,7 @@ const movieCompareUpdater = async (pResult, pMovieLinksObj) => {
     });
 
     await writeFile('./movies.json', JSON.stringify(dataMovie)); //Update movie to jsonMovies
-    if(!movieToAdd.length){console.info('Aucune mise à jour a effectuer'); return} 
+    if(!movieToAdd.length){console.info('Aucune mise à jour a effectuer \n'); return} 
     
     
     await sender(movieWithLinksToAdd);
