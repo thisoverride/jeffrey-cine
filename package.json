@@ -3,9 +3,13 @@
   "author": "thisoverride",
   "version": "1.0.0",
   "main": "main.js",
+  "scripts": {
+    "start": "node cron.js"
+  },
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.0.3",  
+    "dotenv": "^16.0.3",
+    "moment": "^2.29.4",
     "nodemailer": "^6.9.1",
     "puppeteer": "^19.6.0"
   }
